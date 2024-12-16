@@ -129,7 +129,6 @@ table {
 	--white: #e9ded4;
 	--grey: #313131;
 	--dark-grey: #1f1f1f;
-	--beige: #e8dcc8;
 }
 
 * {
@@ -148,6 +147,10 @@ table {
 	box-sizing: border-box;
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
 body {
 	overflow-x: hidden;
 }
@@ -158,6 +161,10 @@ button {
 	-webkit-user-drag: none;
 }
 
+a {
+	text-decoration: inherit;
+}
+
 .container {
 	max-width: 1222px;
 	margin: 0 auto;
@@ -165,21 +172,51 @@ button {
 
 header {
 	height: 700px;
-	background: var(--beige);
+	background: var(--white);
 	padding-top: 26px;
 	position: relative;
 	overflow: hidden;
 	margin-right: -17px;
 }
 
-.header_objects {
+header::after {
+	content: '';
+	background: url('./images/header-texture.png');
+	width: 1920px;
+	height: 1080px;
+	z-index: 50;
+	top: 0;
+	position: absolute;
+	mix-blend-mode: color-burn;
+	background-size: 100%;
+	background-position: center;
+}
+
+.header__ellipse,
+.header__ellipse__text {
+	animation: ellipse 5s infinite ease;
+}
+
+@keyframes ellipse {
+	0% {
+		scale: 1;
+	}
+	50% {
+		scale: 1.05;
+	}
+	100% {
+		scale: 1;
+	}
+}
+
+.header__objects {
 	position: absolute;
 	bottom: 0;
 	right: 134px;
 	pointer-events: none;
 }
 
-.header_objects_path {
+.header__objects-path {
 	position: absolute;
 	bottom: 0;
 	right: 153px;
@@ -188,27 +225,47 @@ header {
 	filter: drop-shadow(0 4px 4px 0 rgba(0, 0, 0, 0.25));
 }
 
-.header_texture {
-	position: absolute;
-	bottom: 0;
-	right: -3;
-	mix-blend-mode: color-burn;
-	pointer-events: none;
-}
-
-.header_chess_1 {
+.header__chess-1 {
 	position: absolute;
 	right: 609px;
 	bottom: 0;
+	animation: chess-1 8s infinite ease;
+	z-index: 100;
 }
 
-.header_chess_2 {
+.header__chess-2 {
 	position: absolute;
 	right: 320px;
 	bottom: 19px;
+	animation: chess-2 8s infinite ease;
+	z-index: 100;
 }
 
-.header_ellipse {
+@keyframes chess-1 {
+	0% {
+		transform: translateX(0%);
+	}
+	50% {
+		transform: translateX(8%);
+	}
+	100% {
+		transform: translateX(0%);
+	}
+}
+
+@keyframes chess-2 {
+	0% {
+		transform: translateX(0%);
+	}
+	50% {
+		transform: translateX(-8%);
+	}
+	100% {
+		transform: translateX(0%);
+	}
+}
+
+.header__ellipse {
 	width: 660px;
 	height: 660px;
 	background-color: var(--orange);
@@ -218,7 +275,7 @@ header {
 	border-radius: 50%;
 }
 
-.header_ellipse_text {
+.header__ellipse__text {
 	position: absolute;
 	right: 250px;
 	top: 0;
@@ -233,11 +290,11 @@ header {
 	z-index: 100;
 }
 
-.header_headlines {
+.header__headlines {
 	margin-bottom: 24px;
 }
 
-.header_headline {
+.header__headline {
 	width: 542px;
 	font-size: 60px;
 	color: var(--grey);
@@ -250,15 +307,15 @@ header {
 	position: relative;
 }
 
-.header_headline:nth-child(2) {
+.header__headline:nth-child(2) {
 	text-align: center;
 }
 
-.header_headline:nth-child(3) {
+.header__headline:nth-child(3) {
 	text-align: end;
 }
 
-.header_message {
+.header__message {
 	width: 542px;
 	text-align: center;
 	color: var(--grey);
@@ -272,12 +329,12 @@ header {
 	position: relative;
 }
 
-.header_buttons {
+.header__buttons {
 	display: flex;
 	gap: 16px;
 }
 
-.header_button {
+.header__button {
 	width: 263px;
 	height: 72px;
 	padding: 20px;
@@ -288,7 +345,7 @@ header {
 	cursor: pointer;
 }
 
-.header_button__black {
+.header__button_black {
 	background: var(--dark-grey);
 	border-radius: 66px;
 	flex-direction: column;
@@ -297,7 +354,7 @@ header {
 	display: inline-flex;
 }
 
-.header_button__black:hover {
+.header__button_black:hover {
 	background: #fbce51;
 	border-radius: 66px;
 	flex-direction: column;
@@ -306,11 +363,11 @@ header {
 	display: inline-flex;
 }
 
-.header_button__black:hover .header_button__black_inner {
+.header__button_black:hover .header__button_black__inner {
 	color: var(--dark-grey);
 }
 
-.header_button__black_inner {
+.header__button_black__inner {
 	width: 165px;
 	text-align: center;
 	color: white;
@@ -319,7 +376,7 @@ header {
 	word-wrap: break-word;
 }
 
-.header_button__transparent {
+.header__button_transparent {
 	height: 72px;
 	border-radius: 66px;
 	border: 2px var(--dark-grey) solid;
@@ -330,7 +387,7 @@ header {
 	background: transparent;
 }
 
-.header_button__transparent_inner {
+.header__button_transparent__inner {
 	width: 100px;
 	text-align: center;
 	color: var(--dark-grey);
@@ -339,11 +396,11 @@ header {
 	word-wrap: break-word;
 }
 
-.header_button__transparent:hover {
+.header__button_transparent:hover {
 	background: var(--dark-grey);
 }
 
-.header_button__transparent:hover .header_button__transparent_inner {
+.header__button_transparent:hover .header__button_transparent__inner {
 	color: white;
 }
 
@@ -356,7 +413,7 @@ header {
 	background: #f54932;
 }
 
-.marquee_line {
+.marquee__line {
 	font-family: Merriweather;
 	font-weight: 400;
 	text-transform: uppercase;
@@ -371,7 +428,7 @@ header {
 	animation: marquee 10s linear infinite;
 }
 
-.marquee_line::after {
+.marquee__line::after {
 	content: 'Дело помощи утопающим — дело рук самих утопающих! • Шахматы двигают вперед не только культуру, но и экономику! • Лед тронулся, господа присяжные заседатели! • ';
 }
 
@@ -389,47 +446,47 @@ header {
 	margin-bottom: 188px;
 }
 
-.support_item {
+.support__item {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	gap: 16px;
 }
 
-.support_item:nth-child(1) {
+.support__item:nth-child(1) {
 	margin-bottom: 64px;
 }
 
-.support_item:nth-child(2) {
+.support__item:nth-child(2) {
 	align-items: start;
 }
 
-.support_text {
+.support__text {
 	font-family: Merriweather;
 	font-weight: 400;
 	font-size: 36px;
 	line-height: 135%;
 	text-transform: uppercase;
-	color: #313131;
+	color: var(--grey);
 	font-variant-numeric: lining-nums;
 }
 
-.support_item:nth-child(1) .support_text {
+.support__item:nth-child(1) .support__text {
 	width: 764px;
 	float: left;
 }
 
-.support_item:nth-child(2) .support_text {
+.support__item:nth-child(2) .support__text {
 	width: 704px;
 	margin-bottom: 60px;
 }
 
-.players_img {
+.players__img {
 	height: 250px;
 	width: 394px;
 }
 
-.game_img {
+.game__img {
 	margin-top: -28px;
 	margin-left: -28px;
 }
@@ -464,14 +521,14 @@ table tr:last-child > td {
 	padding-bottom: 0;
 }
 
-.table_left_text {
+.table-left__text {
 	font-weight: 400;
 	opacity: 0.7;
 	padding-left: 0;
 	white-space: nowrap;
 }
 
-.table_right_text {
+.table-right__text {
 	font-weight: 600;
 	width: 100%;
 	padding-left: 16px;
@@ -482,7 +539,7 @@ table tr:last-child > td {
 	text-decoration-color: var(--red);
 }
 
-.support_link {
+.support__link {
 	font-family: 'Golos Text';
 	font-weight: 400;
 	font-size: 20px;
@@ -498,7 +555,7 @@ table tr:last-child > td {
 	left: 301px;
 }
 
-.section_heading {
+.steps__heading {
 	font-family: 'Merriweather';
 	font-weight: 400;
 	font-size: 54px;
@@ -510,23 +567,27 @@ table tr:last-child > td {
 	text-align: left;
 	margin-bottom: 54px;
 }
-.section_heading_container {
+
+.section__heading__container {
 	position: relative;
 }
 
-.steps_item {
+.steps {
+	margin-bottom: 200px;
+}
+
+.steps__item {
 	width: 394px;
 	height: 112px;
-	background: var(--beige);
+	background: var(--white);
 	padding: 20px;
 	display: flex;
 	gap: 16px;
 	background-image: url('./images/cooper-stamp-paper.png');
-	/* overflow: hidden; */
 	position: relative;
 }
 
-.steps_item::after {
+.steps__item::after {
 	content: '';
 	width: 394px;
 	height: 112px;
@@ -539,10 +600,9 @@ table tr:last-child > td {
 	background-repeat: no-repeat;
 	background-size: 100%;
 	background-position: center;
-	/* background-attachment: fixed; */
 }
 
-.steps_item_num {
+.steps__item__num {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -550,7 +610,7 @@ table tr:last-child > td {
 	font-weight: 600;
 	font-size: 20px;
 	line-height: 120%;
-	color: #313131;
+	color: var(--grey);
 	background-color: #fff;
 	width: 36px;
 	height: 36px;
@@ -559,16 +619,16 @@ table tr:last-child > td {
 	z-index: 100;
 }
 
-.steps_item_desc {
+.steps__item__desc {
 	font-family: 'Golos Text';
 	font-weight: 500;
 	font-size: 20px;
 	line-height: 120%;
-	color: #313131;
+	color: var(--grey);
 	z-index: 100;
 }
 
-.steps_wrapper {
+.steps__wrapper {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr 136px;
@@ -614,12 +674,168 @@ table tr:last-child > td {
 	width: 446px;
 }
 
-.airplane_img {
-	/* width: 376px;
-	height: 140px; */
+.airplane__img {
 	position: absolute;
 	right: -63px;
 	bottom: -1px;
+	animation: airplane 6s infinite ease;
+}
+
+@keyframes airplane {
+	0% {
+		transform: translateX(0%) scale(1) rotate(4deg);
+	}
+	50% {
+		transform: translateX(1%) scale(1.02) rotate(-2deg);
+	}
+	100% {
+		transform: translateX(0%) scale(1) rotate(4deg);
+	}
+}
+
+.members {
+	margin-bottom: 140px;
+}
+
+.members__heading-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 60px;
+}
+
+.members__heading {
+	width: 806px;
+	font-family: 'Merriweather';
+	font-weight: 400;
+	font-size: 54px;
+	line-height: 120%;
+	text-transform: uppercase;
+	color: var(--grey);
+}
+
+.members__wrapper {
+	display: flex;
+	gap: 20px;
+}
+
+.members__item {
+	width: 394px;
+	height: 462px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+.member__avatar {
+	width: 320px;
+	height: 320px;
+	overflow: hidden;
+	border-radius: 50%;
+	background-color: var(--grey);
+	background-image: url('./images/cooper-stamp-paper.png');
+	margin-bottom: 28px;
+}
+
+.member__avatar > img {
+	position: relative;
+	top: 21px;
+	left: 14px;
+}
+
+.member__name {
+	font-family: 'Golos Text';
+	font-weight: 600;
+	font-size: 24px;
+	line-height: 120%;
+	color: var(--grey);
+	margin-bottom: 6px;
+}
+
+.member__status {
+	font-family: 'Golos Text';
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 120%;
+	color: var(--grey);
+	opacity: 0.6;
+	margin-bottom: 20px;
+}
+
+.member__btn {
+	font-family: 'Golos Text';
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 120%;
+	color: #3057a2;
+	border: 1px solid #3057a2;
+	border-radius: 62px;
+	padding: 12px;
+	width: 113px;
+	height: 35px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #fff;
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+.member__btn:hover {
+	color: #fff;
+	background-color: #3057a2;
+}
+
+.slider__buttons-container {
+	display: flex;
+	gap: 14px;
+	align-items: center;
+	font-family: 'Golos Text';
+}
+
+.slider__button {
+	width: 44px;
+	height: 44px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-shrink: 0;
+	border-radius: 50%;
+	background-color: var(--grey);
+	cursor: pointer;
+}
+
+.slider__pages_total {
+	color: #aaa;
+}
+
+.slider__pages_current {
+	opacity: 1;
+}
+
+.right-arrow {
+	transform: rotate(180deg);
+	padding-right: 5px;
+}
+
+.left-arrow {
+	padding-right: 3px;
+}
+
+footer {
+	background-color: var(--white);
+}
+
+footer > .container > p {
+	padding: 40px 0 72px;
+	font-family: 'Golos Text';
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 120%;
+	color: var(--grey);
+	opacity: 0.6;
 }
 
 @media screen and (max-width: 1366px) {
@@ -627,16 +843,16 @@ table tr:last-child > td {
 		margin-right: 0;
 	}
 
-	.header_chess_1,
-	.header_chess_2,
-	.header_objects,
-	.header_ellipse,
-	.header_ellipse_text,
-	.header_objects_path {
+	.header__chess_1,
+	.header__chess_2,
+	.header__objects,
+	.header__ellipse,
+	.header__ellipse__text,
+	.header__objects-path {
 		transform: translateX(275px);
 	}
 
-	.support_item:nth-child(2) .support_text {
+	.support__item:nth-child(2) .support__text {
 		width: 704px;
 	}
 }
